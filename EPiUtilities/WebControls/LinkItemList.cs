@@ -31,9 +31,7 @@ namespace EPiUtilities.WebControls
         }
 
         /// <summary>
-        /// We do the work of filling the control in PreRender. That way 
-        /// we are certain that code using this control as well as databinding
-        /// has already occurred.
+        /// Override which creates and adds the content of the control. 
         /// </summary>
         /// <param name="e"></param>
         protected override void OnPreRender(EventArgs e)
@@ -85,6 +83,12 @@ namespace EPiUtilities.WebControls
             }
         }
 
+        /// <summary>
+        /// Adds an item with the specified template. 
+        /// </summary>
+        /// <param name="template"></param>
+        /// <param name="item"></param>
+        /// <param name="itemNumber"></param>
         protected void AddItemTemplate(ITemplate template, LinkItem item, int itemNumber)
         {
             if (_addSeparator)

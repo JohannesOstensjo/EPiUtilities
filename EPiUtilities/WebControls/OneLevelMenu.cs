@@ -13,6 +13,10 @@ namespace EPiUtilities.WebControls
     [ParseChildren(true)]
     public class OneLevelMenu : ChildrenBasedPageDataMenuBase
     {
+        /// <summary>
+        /// Override which creates and adds the content of the control. 
+        /// </summary>
+        /// <param name="e"></param>
         protected override void OnPreRender(EventArgs e)
         {
             base.OnPreRender(e);
@@ -23,6 +27,8 @@ namespace EPiUtilities.WebControls
 
                 if (!ShowPagesNotVisibleInMenu)
                     items.VisibleInMenu();
+
+                ApplyFilter(items);
 
                 if (items.Count > 0)
                 {

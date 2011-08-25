@@ -221,16 +221,21 @@ namespace EPiUtilities.Extensions
 
         /// <summary>
         /// Returns an html anchor with LinkURL as href and PageName as value. 
+        /// Returns empty if page is null.
         /// </summary>
         /// <param name="page"></param>
         /// <returns></returns>
         public static string ToHtmlAnchorWithLinkUrlAndPageName(this PageData page)
         {
-            return page.ToHtmlAnchorWithLinkUrl(page.PageName);
+            if (page != null)
+                return page.ToHtmlAnchorWithLinkUrl(page.PageName);
+
+            return "";
         }
 
         /// <summary>
         /// Returns an html anchor with LinkURL as href and innerText as value. 
+        /// Returns empty if page is null or innerText is null or empty.
         /// </summary>
         /// <param name="page"></param>
         /// <param name="innerText"></param>
@@ -238,9 +243,10 @@ namespace EPiUtilities.Extensions
         public static string ToHtmlAnchorWithLinkUrl(this PageData page, string innerText)
         {
             if (page != null)
-                return string.Format("<a href=\"{0}\">{1}</a>", page.LinkURL, innerText);
+                if (!innerText.NullOrEmpty())
+                    return string.Format("<a href=\"{0}\">{1}</a>", page.LinkURL, innerText);
 
-            return "<a href=\"#\">#</a>";
+            return "";
         }
     }
 }

@@ -70,7 +70,7 @@ namespace EPiUtilities.Extensions
             if (!reference.IsResolvable())
                 return new PageDataCollection();
 
-            return DataFactory.Instance.GetChildren(reference).ForVisitor();
+            return reference.Children().ForVisitor();
         }
     }
 }

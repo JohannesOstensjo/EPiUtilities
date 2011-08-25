@@ -18,6 +18,9 @@ namespace EPiUtilities.WebControls
     [ParseChildren(true)]
     public class PageDataList : TemplatedPageDataItemListControlBase
     {
+        /// <summary>
+        /// Holds the total number of items before any paging. 
+        /// </summary>
         protected int TotalItemCount;
 
         /// <summary>
@@ -82,9 +85,7 @@ namespace EPiUtilities.WebControls
         public FilterSortDirection SortDirection;
 
         /// <summary>
-        /// We do the work of filling the control in PreRender. That way 
-        /// we are certain that code using this control as well as databinding
-        /// has already occurred.
+        /// Override which creates and adds the content of the control. 
         /// </summary>
         /// <param name="e"></param>
         protected override void OnPreRender(EventArgs e)
@@ -134,6 +135,11 @@ namespace EPiUtilities.WebControls
                 HideOrEmpty();
         }
 
+        /// <summary>
+        /// Gets the items to display in the control, applying sorting 
+        /// and filtering as required. 
+        /// </summary>
+        /// <returns></returns>
         protected PageDataCollection GetItems()
         {
             var items = new PageDataCollection();
@@ -164,8 +170,25 @@ namespace EPiUtilities.WebControls
             return items;
         }
 
+        /// <summary>
+        /// An empty method which can be overridden by descendants which 
+        /// implements paging.
+        /// </summary>
+        /// <param name="itemCount"></param>
         protected virtual void AddHeaderPager(int itemCount) { }
+
+        /// <summary>
+        /// An empty method which can be overridden by descendants which 
+        /// implements paging.
+        /// </summary>
+        /// <param name="itemCount"></param>
         protected virtual void AddFooterPager(int itemCount) { }
+
+        /// <summary>
+        /// An empty method which can be overridden by descendants which 
+        /// implements paging.
+        /// </summary>
+        /// <param name="items"></param>
         protected virtual void ApplyPagingFilter(PageDataCollection items) { }
 
         /// <summary>

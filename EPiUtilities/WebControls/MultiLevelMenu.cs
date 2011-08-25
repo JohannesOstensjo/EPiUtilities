@@ -15,7 +15,14 @@ namespace EPiUtilities.WebControls
     [ParseChildren(true)]
     public class MultiLevelMenu : ChildrenBasedPageDataMenuBase
     {
+        /// <summary>
+        /// Indicates if a separator should be added when adding a new item to a level.
+        /// </summary>
         protected Dictionary<int, bool> AddSeparatorForLevel = new Dictionary<int, bool>();
+
+        /// <summary>
+        /// Indicates if an item was added to a level during an iteration. 
+        /// </summary>
         protected Dictionary<int, bool> AddedForLevel = new Dictionary<int, bool>();
 
         /// <summary>
@@ -28,16 +35,17 @@ namespace EPiUtilities.WebControls
         /// </summary>
         public int NumberOfLevels { get; set; }
 
+        /// <summary>
+        /// Override which creates and adds the content of the control. 
+        /// </summary>
+        /// <param name="e"></param>
         protected override void OnPreRender(EventArgs e)
         {
             base.OnPreRender(e);
 
             if (MenuRoot.IsResolvable())
             {
-                PageDataCollection items = MenuRoot.ChildrenForVisitor();
-
-                if (!ShowPagesNotVisibleInMenu)
-                    items.VisibleInMenu();
+                PageDataCollection items = GetChildrenItems(MenuRoot);
 
                 if (items.Count > 0)
                 {
@@ -54,6 +62,28 @@ namespace EPiUtilities.WebControls
                 HideOrEmpty();
         }
 
+        /// <summary>
+        /// Gets the children of root with filters according to configuration.
+        /// </summary>
+        /// <param name="root"></param>
+        /// <returns></returns>
+        protected PageDataCollection GetChildrenItems(PageReference root)
+        {
+            PageDataCollection items = root.ChildrenForVisitor();
+
+            if (!ShowPagesNotVisibleInMenu)
+                items.VisibleInMenu();
+
+            ApplyFilter(items);
+
+            return items;
+        }
+
+        /// <summary>
+        /// Adds a level. 
+        /// </summary>
+        /// <param name="items"></param>
+        /// <param name="level"></param>
         protected void AddLevel(PageDataCollection items, int level)
         {
             if (items.Count > 0)
@@ -69,11 +99,15 @@ namespace EPiUtilities.WebControls
             }
         }
 
+        /// <summary>
+        /// Adds an item. 
+        /// </summary>
+        /// <param name="item"></param>
+        /// <param name="itemNumber"></param>
+        /// <param name="level"></param>
         protected void AddItem(PageData item, int itemNumber, int level)
         {
             var children = new PageDataCollection();
-            if (!ShowPagesNotVisibleInMenu)
-                children.VisibleInMenu();
 
             bool isSelected = IsSelected(item);
 
@@ -81,10 +115,10 @@ namespace EPiUtilities.WebControls
                 if (ExpandSelectedOnly)
                 {
                     if (isSelected)
-                        children = item.ChildrenForVisitor();
+                        children = GetChildrenItems(item.PageLink);
                 }
                 else
-                    children = item.ChildrenForVisitor();
+                    children = GetChildrenItems(item.PageLink);
 
             if (isSelected)
             {
@@ -124,6 +158,15 @@ namespace EPiUtilities.WebControls
             }
         }
 
+        /// <summary>
+        /// Adds an item with the specified template. 
+        /// </summary>
+        /// <param name="template"></param>
+        /// <param name="item"></param>
+        /// <param name="itemNumber"></param>
+        /// <param name="selected"></param>
+        /// <param name="level"></param>
+        /// <param name="hasChildren"></param>
         protected void AddItemTemplate(ITemplate template, PageData item, int itemNumber, bool selected, int level, bool hasChildren)
         {
             if (!AddSeparatorForLevel.ContainsKey(level))
@@ -143,12 +186,20 @@ namespace EPiUtilities.WebControls
                 AddedForLevel[level] = true;
         }
 
+        /// <summary>
+        /// Adds a level start template.
+        /// </summary>
+        /// <param name="level"></param>
         protected void AddLevelStartTemplate(int level)
         {
             if (LevelStartTemplate != null)
                 AddTemplate(new LevelHeaderFooterTemplateContainer(level), LevelStartTemplate);
         }
 
+        /// <summary>
+        /// Adds a level end template.
+        /// </summary>
+        /// <param name="level"></param>
         protected void AddLevelEndTemplate(int level)
         {
             if (LevelEndTemplate != null)

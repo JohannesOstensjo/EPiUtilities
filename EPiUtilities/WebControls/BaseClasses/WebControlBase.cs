@@ -3,6 +3,9 @@ using System.Web.UI.WebControls;
 
 namespace EPiUtilities.WebControls.BaseClasses
 {
+    /// <summary>
+    /// Base control for web controls. 
+    /// </summary>
     public abstract class WebControlBase : WebControl
     {
         /// <summary>
@@ -50,6 +53,10 @@ namespace EPiUtilities.WebControls.BaseClasses
             base.DataBind(raiseOnDataBinding);
         }
 
+        /// <summary>
+        /// Override which performs AutoBind.
+        /// </summary>
+        /// <param name="e"></param>
         protected override void OnPreRender(System.EventArgs e)
         {
             if (AutoBind)

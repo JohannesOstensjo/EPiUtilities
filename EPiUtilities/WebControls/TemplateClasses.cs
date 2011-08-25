@@ -37,16 +37,23 @@ namespace EPiUtilities.WebControls
     }
 
     /// <summary>
-    /// Template class used for footers.
+    /// Template class used for separators.
     /// </summary>
     public class SeparatorTemplateContainer : BaseTemplateContainer
     {
     }
 
+    /// <summary>
+    /// Template class used for headers and footers in levels in multilevel controls.
+    /// </summary>
     public class LevelHeaderFooterTemplateContainer : BaseTemplateContainer
     {
         private readonly int _level;
 
+        /// <summary>
+        /// Creates a new <see cref="LevelHeaderFooterTemplateContainer"/>.
+        /// </summary>
+        /// <param name="level"></param>
         public LevelHeaderFooterTemplateContainer(int level)
         {
             _level = level;
@@ -70,6 +77,12 @@ namespace EPiUtilities.WebControls
         private readonly int _itemCount;
         private readonly int _pageSize;
 
+        /// <summary>
+        /// Creates a new <see cref="PagerHeaderFooterTemplateContainer"/>.
+        /// </summary>
+        /// <param name="pageNumber"></param>
+        /// <param name="itemCount"></param>
+        /// <param name="pageSize"></param>
         public PagerHeaderFooterTemplateContainer(int pageNumber, int itemCount, int pageSize)
         {
             _pageNumber = pageNumber;
@@ -144,6 +157,13 @@ namespace EPiUtilities.WebControls
         private readonly string _text;
         private readonly bool _selected;
 
+        /// <summary>
+        /// Creates a new <see cref="PagerItemTemplateContainer"/>.
+        /// </summary>
+        /// <param name="url"></param>
+        /// <param name="pageNumber"></param>
+        /// <param name="text"></param>
+        /// <param name="selected"></param>
         public PagerItemTemplateContainer(string url, int pageNumber, string text, bool selected)
         {
             _url = url;
@@ -195,12 +215,23 @@ namespace EPiUtilities.WebControls
         private readonly int _itemNumber;
         private readonly bool _selected;
 
+        /// <summary>
+        /// Base constructor for <see cref="BaseItemTemplateContainer{T}"/>.
+        /// </summary>
+        /// <param name="item"></param>
+        /// <param name="itemNumber"></param>
         protected BaseItemTemplateContainer(T item, int itemNumber)
         {
             _item = item;
             _itemNumber = itemNumber;
         }
 
+        /// <summary>
+        /// Base constructor for <see cref="BaseItemTemplateContainer{T}"/>.
+        /// </summary>
+        /// <param name="item"></param>
+        /// <param name="itemNumber"></param>
+        /// <param name="selected"></param>
         protected BaseItemTemplateContainer(T item, int itemNumber, bool selected)
         {
             _item = item;
@@ -258,7 +289,19 @@ namespace EPiUtilities.WebControls
     /// </summary>
     public class PageDataItemTemplateContainer : BaseItemTemplateContainer<PageData>
     {
+        /// <summary>
+        /// Creates a new <see cref="PageDataItemTemplateContainer"/>.
+        /// </summary>
+        /// <param name="item"></param>
+        /// <param name="itemNumber"></param>
         public PageDataItemTemplateContainer(PageData item, int itemNumber) : base(item, itemNumber) { }
+
+        /// <summary>
+        /// Creates a new <see cref="PageDataItemTemplateContainer"/>.
+        /// </summary>
+        /// <param name="item"></param>
+        /// <param name="itemNumber"></param>
+        /// <param name="selected"></param>
         public PageDataItemTemplateContainer(PageData item, int itemNumber, bool selected) : base(item, itemNumber, selected) { }
     }
 
@@ -270,6 +313,14 @@ namespace EPiUtilities.WebControls
         private readonly int _level;
         private readonly bool _hasChildren;
 
+        /// <summary>
+        /// Creates a new <see cref="PageDataMultiLevelItemTemplateContainer"/>.
+        /// </summary>
+        /// <param name="item"></param>
+        /// <param name="itemNumber"></param>
+        /// <param name="selected"></param>
+        /// <param name="level"></param>
+        /// <param name="hasChildren"></param>
         public PageDataMultiLevelItemTemplateContainer(PageData item, int itemNumber, bool selected, int level, bool hasChildren) : base(item, itemNumber, selected)
         {
             _level = level;
@@ -298,7 +349,19 @@ namespace EPiUtilities.WebControls
     /// </summary>
     public class LinkItemItemTemplateContainer : BaseItemTemplateContainer<LinkItem>
     {
+        /// <summary>
+        /// Creates a new <see cref="LinkItemItemTemplateContainer"/>.
+        /// </summary>
+        /// <param name="item"></param>
+        /// <param name="itemNumber"></param>
         public LinkItemItemTemplateContainer(LinkItem item, int itemNumber) : base(item, itemNumber) { }
+
+        /// <summary>
+        /// Creates a new <see cref="LinkItemItemTemplateContainer"/>.
+        /// </summary>
+        /// <param name="item"></param>
+        /// <param name="itemNumber"></param>
+        /// <param name="selected"></param>
         public LinkItemItemTemplateContainer(LinkItem item, int itemNumber, bool selected) : base(item, itemNumber, selected) { }
     }
 }

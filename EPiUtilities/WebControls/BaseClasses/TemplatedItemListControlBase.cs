@@ -16,24 +16,36 @@ namespace EPiUtilities.WebControls.BaseClasses
         /// </summary>
         public bool InvisibleIfEmpty { get; set; }
 
+        /// <summary>
+        /// Adds the header template. 
+        /// </summary>
         protected void AddHeaderTemplate()
         {
             if (HeaderTemplate != null)
                 AddTemplate(new HeaderTemplateContainer(), HeaderTemplate);
         }
 
+        /// <summary>
+        /// Adds the footer template.
+        /// </summary>
         protected void AddFooterTemplate()
         {
             if (FooterTemplate != null)
                 AddTemplate(new FooterTemplateContainer(), FooterTemplate);
         }
 
+        /// <summary>
+        /// Adds the separator template.
+        /// </summary>
         protected void AddSeparatorTemplate()
         {
             if (SeparatorTemplate != null)
                 AddTemplate(new SeparatorTemplateContainer(), SeparatorTemplate);
         }
 
+        /// <summary>
+        /// Adds the empty template or hides the control. 
+        /// </summary>
         protected void HideOrEmpty()
         {
             if (InvisibleIfEmpty)
@@ -43,6 +55,11 @@ namespace EPiUtilities.WebControls.BaseClasses
                     AddTemplate(new EmptyTemplateContainer(), EmptyTemplate);
         }
 
+        /// <summary>
+        /// Adds a template to the control collection. 
+        /// </summary>
+        /// <param name="container"></param>
+        /// <param name="template"></param>
         protected void AddTemplate(BaseTemplateContainer container, ITemplate template)
         {
             template.InstantiateIn(container);

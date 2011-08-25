@@ -95,23 +95,39 @@ namespace EPiUtilities.WebControls
         /// </summary>
         public bool HideBottomPager { get; set; }
 
+        /// <summary>
+        /// Applies a pager filter to the items to limit items to the current page.
+        /// </summary>
+        /// <param name="items"></param>
         protected override void ApplyPagingFilter(PageDataCollection items)
         {
             items.FilterForPager(PageSize, CurrentPageNumber);
         }
 
+        /// <summary>
+        /// Adds a pager to the header if specified. 
+        /// </summary>
+        /// <param name="itemCount"></param>
         protected override void AddHeaderPager(int itemCount)
         {
             if (ShowTopPager)
                 AddPager(itemCount);
         }
 
+        /// <summary>
+        /// Adds a pager to the footer if specified.
+        /// </summary>
+        /// <param name="itemCount"></param>
         protected override void AddFooterPager(int itemCount)
         {
             if (!HideBottomPager)
                 AddPager(itemCount);
         }
 
+        /// <summary>
+        /// Adds a full set of pager templates to the controls. 
+        /// </summary>
+        /// <param name="itemCount"></param>
         protected void AddPager(int itemCount)
         {
             var numberOfPages = (int)Math.Ceiling((decimal)itemCount / PageSize);
@@ -149,23 +165,45 @@ namespace EPiUtilities.WebControls
             AddPagerFooterTemplate(CurrentPageNumber, itemCount, PageSize);
         }
 
+        /// <summary>
+        /// Adds a pager item template.
+        /// </summary>
+        /// <param name="template"></param>
+        /// <param name="pageNumber"></param>
+        /// <param name="text"></param>
+        /// <param name="selected"></param>
         protected void AddPagerItemTemplate(ITemplate template, int pageNumber, string text, bool selected)
         {
             AddTemplate(new PagerItemTemplateContainer(GetCurrentUrlWithParameterChanged(PagingQueryParameterKey, pageNumber.ToString()), pageNumber, text, selected), template);
         }
 
+        /// <summary>
+        /// Adds a pager header template. 
+        /// </summary>
+        /// <param name="pageNumber"></param>
+        /// <param name="itemCount"></param>
+        /// <param name="pageSize"></param>
         protected void AddPagerHeaderTemplate(int pageNumber, int itemCount, int pageSize)
         {
             if (HeaderTemplate != null)
                 AddTemplate(new PagerHeaderFooterTemplateContainer(pageNumber, itemCount, pageSize), HeaderTemplate);
         }
 
+        /// <summary>
+        /// Adds a pager footer template.
+        /// </summary>
+        /// <param name="pageNumber"></param>
+        /// <param name="itemCount"></param>
+        /// <param name="pageSize"></param>
         protected void AddPagerFooterTemplate(int pageNumber, int itemCount, int pageSize)
         {
             if (FooterTemplate != null)
                 AddTemplate(new PagerHeaderFooterTemplateContainer(pageNumber, itemCount, pageSize), FooterTemplate);
         }
 
+        /// <summary>
+        /// Adds a pager separator template.
+        /// </summary>
         protected void AddPagerSeparatorTemplate()
         {
             if (PagerSeparatorTemplate != null)

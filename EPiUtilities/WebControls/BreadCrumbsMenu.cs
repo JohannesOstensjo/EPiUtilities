@@ -59,6 +59,10 @@ namespace EPiUtilities.WebControls
             set { _currentPage = value; }
         }
 
+        /// <summary>
+        /// Override which creates and adds the content of the control. 
+        /// </summary>
+        /// <param name="e"></param>
         protected override void OnPreRender(EventArgs e)
         {
             base.OnPreRender(e);

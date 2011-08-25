@@ -9,7 +9,7 @@ namespace EPiUtilities.Extensions
     public static class EnumerableExtensions
     {
         /// <summary>
-        /// Converts a collection of <see cref="PageData"/> to a <see cref="PageDataCollection"/>.
+        /// Converts an enumerable of <see cref="PageData"/> to a <see cref="PageDataCollection"/>.
         /// </summary>
         /// <param name="enumerable"></param>
         /// <returns></returns>
@@ -19,7 +19,7 @@ namespace EPiUtilities.Extensions
         }
 
         /// <summary>
-        /// Converts a collection of <see cref="PageReference"/> to a <see cref="PageDataCollection"/>.
+        /// Converts an enumerable of <see cref="PageReference"/> to a <see cref="PageDataCollection"/>.
         /// Any non resolvable references are dropped without errors. 
         /// </summary>
         /// <param name="enumerable"></param>

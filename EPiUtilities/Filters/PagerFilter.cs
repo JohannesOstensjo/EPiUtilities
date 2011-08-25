@@ -66,7 +66,7 @@ namespace EPiUtilities.Filters
         /// <returns></returns>
         public bool ShouldFilter(PageData page)
         {
-            throw new NotImplementedException();
+            throw new NotSupportedException("PagerFilter only makes sense in a collection context. Use Filter(), not ShouldFilter().");
         }
     }
 }

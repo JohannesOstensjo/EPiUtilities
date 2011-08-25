@@ -70,7 +70,7 @@ namespace EPiUtilities.Extensions
         }
 
         /// <summary>
-        /// Returns an html image tag with string as url and specified alt text.
+        /// Returns a html image tag with string as url and specified alt text.
         /// Returns empty string if imageUrl is null or empty.
         /// </summary>
         /// <param name="imageUrl"></param>
@@ -85,39 +85,51 @@ namespace EPiUtilities.Extensions
             return "";
         }
 
+        /// <summary>
+        /// Returns a html figure tag with an image and figcaption tag inside
+        /// using the string as imageUrl. 
+        /// Figcaption is only added if figcaption text is not null or empty. 
+        /// </summary>
+        /// <param name="imageUrl"></param>
+        /// <param name="altText"></param>
+        /// <param name="figCaption"></param>
+        /// <returns></returns>
         public static string ToFigureWithImgAndAltAndFigcaption(this string imageUrl, string altText, string figCaption)
         {
             if (!imageUrl.NullOrEmpty())
-                return string.Format("<figure><img src=\"{0}\" alt=\"{1}\" /><figcaption>{2}</figcaption></figure>", imageUrl, altText, figCaption);
+            {
+                if (!figCaption.NullOrEmpty())
+                    return string.Format("<figure><img src=\"{0}\" alt=\"{1}\" /><figcaption>{2}</figcaption></figure>", imageUrl, altText, figCaption);
+                
+                return string.Format("<figure><img src=\"{0}\" alt=\"{1}\" /></figure>", imageUrl, altText);
+            }
 
             return "";
         }
 
         /// <summary>
-        /// If text has content, returns it surrounded by a div. 
-        /// Returns empty if text is empty.
+        /// If content is not null or empty, returns it surrounded by a div. 
         /// </summary>
-        /// <param name="text"></param>
+        /// <param name="content"></param>
         /// <returns></returns>
-        public static string ToDiv(this string text)
+        public static string SurroundWithDiv(this string content)
         {
-            if (!text.NullOrEmpty())
-                return string.Format("<div>{0}</div>", text);
+            if (!content.NullOrEmpty())
+                return string.Format("<div>{0}</div>", content);
 
             return "";
         }
 
         /// <summary>
-        /// If text has content, returns it surrounded by a div. 
-        /// Returns empty if text is empty.
+        /// If content is not null or empty, returns it surrounded by a div with a css class.
         /// </summary>
-        /// <param name="text"></param>
+        /// <param name="content"></param>
         /// <param name="cssClass"></param>
         /// <returns></returns>
-        public static string ToDivWithCssClass(this string text, string cssClass)
+        public static string SurroundWithDivWithCssClass(this string content, string cssClass)
         {
-            if (!text.NullOrEmpty())
-                return string.Format("<div class=\"{0}\">{1}</div>", cssClass, text);
+            if (!content.NullOrEmpty())
+                return string.Format("<div class=\"{0}\">{1}</div>", cssClass, content);
 
             return "";
         }

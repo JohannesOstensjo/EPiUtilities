@@ -9,14 +9,34 @@ namespace EPiUtilities.WebControls.BaseClasses
     /// </summary>
     public abstract class TemplatedPageDataItemListControlBase : TemplatedItemListControlBase
     {
+        /// <summary>
+        /// Indicates whether a separator should be added before adding a new item. 
+        /// </summary>
         protected bool AddSeparator;
+
+        /// <summary>
+        /// Indicates whether an item was added during an iteration. 
+        /// </summary>
         protected bool Added;
 
+        /// <summary>
+        /// Adds an item with the specified template. Assumes selected is false.
+        /// </summary>
+        /// <param name="template"></param>
+        /// <param name="item"></param>
+        /// <param name="itemNumber"></param>
         protected void AddItemTemplate(ITemplate template, PageData item, int itemNumber)
         {
             AddItemTemplate(template, item, itemNumber, false);
         }
 
+        /// <summary>
+        /// Adds an item with the specified template.
+        /// </summary>
+        /// <param name="template"></param>
+        /// <param name="item"></param>
+        /// <param name="itemNumber"></param>
+        /// <param name="selected"></param>
         protected void AddItemTemplate(ITemplate template, PageData item, int itemNumber, bool selected)
         {
             if (AddSeparator)
