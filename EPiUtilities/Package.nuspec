@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
+  <metadata>
+    <id>EPiUtilities</id>
+    <version>1.0.0.0</version>
+    <authors>Johannes Østensjø</authors>
+    <owners>Open source project</owners>
+    <projectUrl>https://github.com/JohannesOstensjo/EPiUtilities</projectUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>A library of useful functionality for EPiServer CMS. Contains custom web controls, extension methods and filters. Built for EPiServer CMS 6.0, should be compatible with 6.x.</description>
+    <tags>EPiServer</tags>
+    <dependencies>
+      <dependency id="AntiXSS" version="4.0.1" />
+    </dependencies>
+  </metadata>
+</package>

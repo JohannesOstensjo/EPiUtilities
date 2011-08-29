@@ -1,0 +1,12 @@
+﻿<configuration>
+    <system.web>
+        <pages>
+            <controls>
+                <add tagPrefix="EPiUtil" namespace="EPiUtilities.WebControls" assembly="EPiUtilities" />
+            </controls>
+            <namespaces>
+                <add namespace="EPiUtilities.Extensions" />
+            </namespaces>
+        </pages>
+    </system.web>
+</configuration>

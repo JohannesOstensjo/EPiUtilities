@@ -91,7 +91,6 @@ namespace EPiUtilities.WebControls
                             Added = false;
                             AddSeparator = true;
                         }
-
                     }
 
                     AddFooterTemplate();
@@ -108,12 +107,13 @@ namespace EPiUtilities.WebControls
             var items = new PageDataCollection();
             PageData currentItem = CurrentPage.ToPageData();
 
-            items.Add(currentItem);
             AddParentIfRequired(currentItem, items);
 
             items.ForVisitor();
             if (!ShowPagesNotVisibleInMenu)
                 items.VisibleInMenu();
+
+            items.Add(currentItem);
 
             return items;
         }
